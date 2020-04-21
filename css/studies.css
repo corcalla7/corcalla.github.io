@@ -1,5 +1,5 @@
 body {
-    background: rgb(125, 198, 205);
+    background: #443791;
     color: rgb(45, 45, 45);
     padding: 10px;
     font-family: arial;
@@ -8,17 +8,20 @@ header {
     font-size: 1.5em;
     font-weight: bold;
 }
-[id=all-contents] {
+#all-contents {
     max-width: 800px;
     margin: auto;
+    color: white;
 }
 
 /* navigation menu */
 nav {
-    background: rgb(239, 80, 41);
+    background: #605699;
     margin: 0 auto;
+    margin-bottom: 20px;
     display: flex;
     padding: 10px;
+    border-radius: 15px 15px 0px 0px;
 }
 nav header {
     display: flex;
@@ -40,9 +43,9 @@ nav a {
 
 /* main container area beneath menu */
 main {
-    background: rgb(245, 238, 219);
+    background: #8c7ee0;
     display: flex;
-    padding:inherit;
+    border-radius: 0px 0px 15px 15px;
 }
 [class=content] {
     flex: 1;
