@@ -18,7 +18,6 @@
  * Complex Datatypes include:
  * - Array
  * - Object
- * - Dates
  * - null
  * - Functions
  *
@@ -79,20 +78,24 @@ var full = first + " " + last; // "Corbin Callais"
 var full2 = first.concat(" ", last); // Also "Corbin Callais"
 
 /*
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
+ * - undefined is less a datatype, and more of a lack of one. It's considered a
+ *   placeholder for objects in memory, such as variables, that haven't been
+ *   assigned a proper value yet. This keeps the object in memory, allowing it
+ *   to be reassigned later. 
+ *   - undefined cannot be used for anything except placeholding, as operands
+ *     don't work, and there's no methods attached to it. That said, it makes
+ *     more than a few situations significantly less difficult, such as leaving
+ *     a variable open for dynamic value changing.
+ * Examples:
+ */
+
+var z; // Automatically set to undefined
+z = 20; // This works because undefined is keeping it in memory, despite not
+        // being manually assigned to anything.
+var undef = undefined; // Could also just set it yourself, it changes nothing
+
+/*
+ * - Arrays are 
  *
  *
  *
