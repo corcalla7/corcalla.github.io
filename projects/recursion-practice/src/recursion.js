@@ -351,11 +351,34 @@ var nestedEvenSum = function(obj) {
 // 29. Flatten an array containing nested arrays.
 // Example: flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
 var flatten = function(arrays) {
+  // B.C.
+  if (!arrays.length) {
+    return [];
+  }
+  // R.C.
+  if (!Array.isArray(arrays[0])) {
+    return [arrays[0]].concat(flatten(arrays.slice(1)));
+  } else {
+    return flatten(arrays[0]).concat(flatten(arrays.slice(1)));
+  }
 };
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
 var letterTally = function(str, obj) {
+  // B.C.
+  if (!str.length) {
+    return obj;
+  }
+  const counterObj = obj || {};
+  // If it exists, add 1, if not, create it and set it to 1
+  if (counterObj[str[0]]) {
+    counterObj[str[0]]++;
+  } else {
+    counterObj[str[0]] = 1;
+  }
+  // R.C.
+  return letterTally(str.slice(1), counterObj);
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
@@ -364,6 +387,18 @@ var letterTally = function(str, obj) {
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
 var compress = function(list) {
+  // B.C.
+  if (!list.length) {
+    return [];
+  }
+  
+  // R.C.
+  if (list[0] !== list[1]) {
+    return [list[0]].concat(compress(list.slice(1)));
+  } else {
+    return compress(list.slice(1));
+  }
+  
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -376,6 +411,22 @@ var augmentElements = function(array, aug) {
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 var minimizeZeroes = function(array) {
+  // B.C.
+  if (!array.length) {
+    return [];
+  }
+  // R.C.
+  // If it's not even 0, it gets an automatic pass
+  if (array[0] !== 0) {
+    return [array[0]].concat(minimizeZeroes(array.slice(1)));
+  }
+  // If it is a 0 but is not equal to the next iteration, it gets a pass
+  if (array[0] === 0 && array[0] !== array[1]) {
+    return [array[0]].concat(minimizeZeroes(array.slice(1)));
+    // If it is, though, we pass it up
+  } else if (array[0] === 0 && array[0] === array[1]) {
+    return minimizeZeroes(array.slice(1));
+  }
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
@@ -383,12 +434,51 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  // B.C.
+  if (!array.length) {
+    return [];
+  }
+  // R.C.
+  if (array.length % 2 === 0) {
+    return [Math.abs(array[0])].concat(alternateSign(array.slice(1)));
+  } else if (array.length % 2 === 1) {
+    return [-Math.abs(array[0])].concat(alternateSign(array.slice(1)));
+  }
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str) {
+  // B.C.
+  if (!str.length) {
+    return '';
+  }
+  // R.C.
+  switch (str[0]) {
+    case '1':
+      return 'one'.concat(numToText(str.slice(1)));
+    case '2':
+      return 'two'.concat(numToText(str.slice(1)));
+    case '3':
+      return 'three'.concat(numToText(str.slice(1)));
+    case '4':
+      return 'four'.concat(numToText(str.slice(1)));
+    case '5':
+      return 'five'.concat(numToText(str.slice(1)));
+    case '6':
+      return 'six'.concat(numToText(str.slice(1)));
+    case '7':
+      return 'seven'.concat(numToText(str.slice(1)));
+    case '8':
+      return 'eight'.concat(numToText(str.slice(1)));
+    case '9':
+      return 'nine'.concat(numToText(str.slice(1)));
+    case '0':
+      return 'zero'.concat(numToText(str.slice(1)));
+    default:
+      return str[0].concat(numToText(str.slice(1)));
+  }
 };
 
 // *** EXTRA CREDIT ***
